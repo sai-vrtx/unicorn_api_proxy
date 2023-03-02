@@ -11,6 +11,10 @@ phases:
   build:
     commands:
       - python tests_app.py -v #this will test the app works
+  post_build:
+    commands:
+      - '[ ${CODEBUILD_BUILD_SUCCEEDING:-0} -eq 1 ] || exit 1'
+      - echo "Build succeeded..."
 artifacts:
   files:
     - '**/*'
